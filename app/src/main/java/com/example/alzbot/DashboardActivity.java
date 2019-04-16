@@ -1,9 +1,7 @@
 package com.example.alzbot;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,13 +29,11 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
-import static com.example.alzbot.service.NotificationHelper.ALARM_TYPE_RTC;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class DashboardActivity extends AppCompatActivity {
+    private static final String TAG = DashboardActivity.class.getSimpleName();
 
     /**
      * Code used in requesting runtime permissions.
@@ -48,29 +44,35 @@ public class MainActivity extends AppCompatActivity {
     private boolean mAlreadyStartedService = false;
     FirebaseDatabase database;
     DatabaseReference locationReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+        String sw=getIntent().getStringExtra("sw")+"";
+        if(sw.contains("stop alarm"))
+        {
+            
+        }
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SetupDetails.class));
+                startActivity(new Intent(DashboardActivity.this,SetupDetails.class));
             }
         });
         findViewById(R.id.button3
         ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SetupMeds.class));
+                startActivity(new Intent(DashboardActivity.this,SetupMeds.class));
             }
         });
         findViewById(R.id.button2
         ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,AddAlarmtoMeds.class));
+                startActivity(new Intent(DashboardActivity.this,AddAlarmtoMeds.class));
             }
         });
         database=FirebaseDatabase.getInstance();
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
      * Show A Dialog with button to refresh the internet state.
      */
     private void promptInternetConnect() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
         builder.setTitle(R.string.title_alert_no_intenet);
         builder.setMessage(R.string.msg_alert_no_internet);
 
@@ -257,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             // Request permission
-                            ActivityCompat.requestPermissions(MainActivity.this,
+                            ActivityCompat.requestPermissions(DashboardActivity.this,
                                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                                     REQUEST_PERMISSIONS_REQUEST_CODE);
                         }
@@ -267,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the img_user denied the permission
             // previously and checked "Never ask again".
-            ActivityCompat.requestPermissions(MainActivity.this,
+            ActivityCompat.requestPermissions(DashboardActivity.this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
