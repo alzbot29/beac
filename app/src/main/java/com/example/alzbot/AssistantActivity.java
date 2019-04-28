@@ -1,14 +1,25 @@
 package com.example.alzbot;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -42,7 +53,7 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
         }
 
 
-        final AIConfiguration config = new AIConfiguration("1c5baa042cc2423f94ff3dcae78a2b39",
+        final AIConfiguration config = new AIConfiguration("acbe80cae84249caa2b796604b6a44ed",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
 
@@ -74,10 +85,7 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
                 if (grantResults.length == 0
                         || grantResults[0] !=
                         PackageManager.PERMISSION_GRANTED) {
-
-
                 } else {
-
                 }
                 return;
             }
@@ -91,9 +99,27 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
         Log.d(TAG, "onResult: this is the result returned from dialogflow" + result.toString());
         Result result1 = result.getResult();
         assistance_question_text.setText(result1.getResolvedQuery());
-        assistance_answer_text.setText(result1.getFulfillment().getSpeech());
+        if(result1.getFulfillment().getSpeech().contains("njkdfsgl"))
+        {
+            FirebaseDatabase database=FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference=database.getReference();
+            DatabaseReference patient =databaseReference.child("patient");
+            patient.child("econtact").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    number=dataSnapshot.getValue().toString();
 
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
+    String number="";
 
     @Override
     public void onError(AIError error) {

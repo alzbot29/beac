@@ -42,8 +42,8 @@ public class LocationMonitoringService extends Service implements
                 .addApi(LocationServices.API)
                 .build();
 
-        mLocationRequest.setInterval(360000);
-        mLocationRequest.setFastestInterval(240000);
+        mLocationRequest.setInterval(420000);
+        mLocationRequest.setFastestInterval(420000);
 
 
         int priority = LocationRequest.PRIORITY_HIGH_ACCURACY; //by default

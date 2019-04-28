@@ -40,7 +40,6 @@ public class DashboardActivity extends AppCompatActivity {
      */
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-
     private boolean mAlreadyStartedService = false;
     FirebaseDatabase database;
     DatabaseReference locationReference;
@@ -77,6 +76,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
         database=FirebaseDatabase.getInstance();
         locationReference=database.getReference("location");
+
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 new BroadcastReceiver() {
                     @Override
@@ -84,13 +84,9 @@ public class DashboardActivity extends AppCompatActivity {
                         String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
                         String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
 
-                        if (latitude != null && longitude != null) {
-                            Log.e("",getString(R.string.msg_location_service_started) + "\n Latitude : " + latitude + "\n Longitude: " + longitude);
-                            HashMap<String,String> latlng=new HashMap<>();
-                            latlng.put("lat",latitude);
-                            latlng.put("lng",longitude);
-                            locationReference.push().setValue(latlng);
-                        }
+//                        if (latitude != null && longitude != null) {
+                            Log.d(getString(R.string.msg_location_service_started) , "\n Latitude : " + latitude + "\n Longitude: " + longitude);
+//                        }
                     }
                 }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
         );
@@ -195,7 +191,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         if (!mAlreadyStartedService) {
 
-            Log.e("",getString(R.string.msg_location_service_started));
+            Log.e("asas",getString(R.string.msg_location_service_started));
 
             //Start location sharing service to app server.........
             Intent intent = new Intent(this, LocationMonitoringService.class);

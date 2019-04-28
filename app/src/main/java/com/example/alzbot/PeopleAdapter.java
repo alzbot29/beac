@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHolder> {
-    List<People> list=new ArrayList<>();
+    List<People> list;
 
     public PeopleAdapter(List<People> list) {
         this.list = list;
@@ -27,8 +27,9 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
     @Override
     public void onBindViewHolder(@NonNull PeopleHolder peopleHolder, int i) {
         if(list!=null){
-                peopleHolder.name.setText(list.get(i).getNaamm());
+            peopleHolder.name.setText(list.get(i).getNaamm());
             peopleHolder.rel.setText(list.get(i).getRelationn());
+            peopleHolder.address.setText(list.get(i).getPlacee());
         }
     }
 
@@ -38,11 +39,12 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
     }
 
     public class PeopleHolder extends RecyclerView.ViewHolder {
-        TextView name,rel;
+        TextView name,rel,address;
         public PeopleHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
-            rel=itemView.findViewById(R.id.rel);
+            rel=itemView.findViewById(R.id.relationship);
+            address=itemView.findViewById(R.id.address);
         }
     }
 }

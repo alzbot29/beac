@@ -19,7 +19,7 @@ import com.example.alzbot.R;
 
 import java.util.Random;
 
-public class RingtonePlayingService extends Service {
+public class AskMeSomethingService extends Service {
 
     private boolean isRunning;
     private Context context;
