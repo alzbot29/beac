@@ -29,6 +29,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -89,6 +91,8 @@ public class DashboardActivity extends AppCompatActivity {
                             HashMap<String,String> key=new HashMap<>();
                             key.put("latitude",latitude);
                             key.put("longitude",longitude);
+                        Date currentTime = Calendar.getInstance().getTime();
+                            key.put("time",currentTime.toString());
                         locationReference.push().setValue(key);
 //                        }
                     }
