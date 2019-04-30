@@ -48,7 +48,7 @@ public class RingtonePlayingService extends Service {
 
         Notification mNotify  = new Notification.Builder(this)
                 .setContentTitle("Take your Meds" + "!")
-                .setContentText("Click me!")
+                .setContentText("Medicine Time!")
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
@@ -75,44 +75,7 @@ public class RingtonePlayingService extends Service {
         if(!this.isRunning && startId == 1) {
             Log.e("if there was not sound ", " and you want start");
 
-            int min = 1;
-            int max = 9;
-
-            Random r = new Random();
-            int random_number = r.nextInt(max - min + 1) + min;
-            Log.e("random number is ", String.valueOf(random_number));
-
-            if (random_number == 1) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_beeps);
-            }
-            else if (random_number == 2) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock);
-            }
-            else if (random_number == 3) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock_gta6);
-            }
-            else if (random_number == 4) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock_gta6);
-            }
-            else if (random_number == 5) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock);
-            }
-            else if (random_number == 6) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock);
-            }
-            else if (random_number == 7) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock_gta6);
-            }
-            else if (random_number == 8) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_beeps);
-            }
-            else if (random_number == 9) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_beeps);
-            }
-            else {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock);
-            }
-            //mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_1);
+            mMediaPlayer = MediaPlayer.create(this, R.raw.alarm_clock);
 
             mMediaPlayer.start();
 

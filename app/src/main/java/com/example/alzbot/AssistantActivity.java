@@ -116,6 +116,8 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     number=dataSnapshot.getValue().toString();
+                    SmsManager.getDefault().sendTextMessage(number, null, "Your Family member is in danger!!", null, null);
+
 
                 }
 

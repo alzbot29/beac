@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,30 +38,31 @@ public class SetupDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_details);
         initui();
-        AlzManager.initializeInstance(SetupDetails.this);
-        Set<String> patientSet=new HashSet<>();
-        Set<String> Def=new HashSet<>();
-        
-        patientSet=AlzManager.getInstance().getValue("patient",Def);
-        if(patientSet.size()>0)
-        {
-            String[] arra= patientSet.toArray(new String[patientSet.size()]);
-
-            drname.setText(arra[0]);
-            eaddress.setText(arra[1]);
-            econtact.setText(arra[2]);
-            drmobile.setText(arra[3]);
-            ename.setText(arra[4]);
-            dob.setText("DOB: "+arra[5]);
-            dobstr=arra[5];
-            name.setText(arra[6]);
-            address.setText(arra[7]);
-            for (int i = 0; i < arra.length; i++) {
-                Log.e("arra["+i+"]: ",arra[i]);
-
+        FirebaseDatabase database=FirebaseDatabase.getInstance();
+        DatabaseReference reference=database.getReference();
+        reference.child("patient").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Patient patient=dataSnapshot.getValue(Patient.class);
+                try {
+                    name.setText(patient.getName());
+                    address.setText(patient.getAddress());
+                    drname.setText(patient.getDrname());
+                    drmobile.setText(patient.getDrmobile());
+                    ename.setText(patient.getEname());
+                    econtact.setText(patient.getEcontact());
+                    eaddress.setText(patient.getEaddress());
+                    save.setText(patient.getSave());
+                    dob.setText(patient.getDob());
+                } catch (Exception e) {
+                }
             }
 
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         dateFormatter=new SimpleDateFormat("yyyy-MM-dd");
 
         dob.setOnClickListener(new View.OnClickListener() {
@@ -80,16 +84,6 @@ public class SetupDetails extends AppCompatActivity {
                 patient.setEcontact(econtact.getText().toString());
                 patient.setEaddress(eaddress.getText().toString());
                 patient.setDob(dobstr);
-                Set<String> patientSet=new HashSet<>();
-                patientSet.add(patient.getName());
-                patientSet.add(patient.getAddress());
-                patientSet.add(patient.getDrname());
-                patientSet.add(patient.getDrmobile());
-                patientSet.add(patient.getEname());
-                patientSet.add(patient.getEcontact());
-                patientSet.add(patient.getEaddress());
-                patientSet.add(patient.getDob());
-                AlzManager.getInstance().setValue("patient",patientSet);
                 FirebaseDatabase database=FirebaseDatabase.getInstance();
                 DatabaseReference reference=database.getReference();
                 reference.child("patient").setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -111,6 +105,7 @@ public class SetupDetails extends AppCompatActivity {
         eaddress=findViewById(R.id.eaddress);
         save=findViewById(R.id.save);
         dob=findViewById(R.id.dob);
+
     }
     private void setDateTimeField() {
         Calendar newCalendar = dateSelected;
