@@ -86,6 +86,10 @@ public class DashboardActivity extends AppCompatActivity {
 
 //                        if (latitude != null && longitude != null) {
                             Log.d(getString(R.string.msg_location_service_started) , "\n Latitude : " + latitude + "\n Longitude: " + longitude);
+                            HashMap<String,String> key=new HashMap<>();
+                            key.put("latitude",latitude);
+                            key.put("longitude",longitude);
+                        locationReference.push().setValue(key);
 //                        }
                     }
                 }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
