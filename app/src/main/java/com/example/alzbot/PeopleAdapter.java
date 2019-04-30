@@ -35,12 +35,14 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
             peopleHolder.address.setText(list.get(i).getPlacee());
             peopleHolder.address.setText(list.get(i).getPlacee());
             String url = list.get(i).getDownloadUrl();
-            Picasso.get()
-                    .load(url)
-                    .placeholder(R.drawable.ic_blur_on_black_24dp)
-                    .error(R.drawable.ic_blur_off_black_24dp)
-                    .into(peopleHolder.imageView);
-            Picasso.get().load(url).into(peopleHolder.imageView);
+            try {
+                Picasso.get()
+                        .load(url)
+                        .placeholder(R.drawable.ic_blur_on_black_24dp)
+                        .error(R.drawable.ic_blur_off_black_24dp)
+                        .into(peopleHolder.imageView);
+            } catch (Exception e) {
+            }
             peopleHolder.people=list.get(i);
         }
     }
@@ -89,7 +91,10 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
             age1.setText(people.getAgee());
             notes1.setText(people.getNotess());
             livesin1.setText(people.getLivee());
-            Picasso.get().load(people.getDownloadUrl()).into(imageView);
+            try {
+                Picasso.get().load(people.getDownloadUrl()).into(imageView);
+            } catch (Exception e) {
+            }
             dialog.show();
 
         }

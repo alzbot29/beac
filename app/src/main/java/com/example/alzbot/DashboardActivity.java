@@ -29,9 +29,12 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -92,7 +95,8 @@ public class DashboardActivity extends AppCompatActivity {
                             key.put("latitude",latitude);
                             key.put("longitude",longitude);
                         Date currentTime = Calendar.getInstance().getTime();
-                            key.put("time",currentTime.toString());
+                        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+                        key.put("time",dateFormat.format(currentTime));
                         locationReference.push().setValue(key);
 //                        }
                     }

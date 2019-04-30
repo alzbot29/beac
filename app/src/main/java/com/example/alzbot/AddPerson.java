@@ -87,8 +87,31 @@ public class AddPerson extends AppCompatActivity {
                 fos.write(bitmapdata);
                 fos.flush();
                 fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+
+                    final ProgressDialog ss=new ProgressDialog(v.getContext());
+                    ss.setTitle("Uploading..");
+                    ss.setCancelable(false);
+                    ss.show();
+                    naamm = naam.getText().toString();
+                    livee = livesIn.getText().toString();
+                    agee = age.getText().toString();
+                    placee = place.getText().toString();
+                    timee = time.getText().toString();
+                    relationn = relation.getText().toString();
+                    notess = notes.getText().toString();
+                    People people=new People(naamm,livee,agee,placee,timee,relationn,notess,"");
+                    FirebaseDatabase database =FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference=database.getReference();
+                    DatabaseReference databaseReference1=databaseReference.child("person");
+                    databaseReference1.push().setValue(people).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(AddPerson.this, naamm+" added to personnel contacts", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                            ss.dismiss();
+                        }
+                    });
                 }
                 final ProgressDialog ss=new ProgressDialog(v.getContext());
                 ss.setTitle("Uploading..");
@@ -103,7 +126,6 @@ public class AddPerson extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Uri downloadUrl) {
                                         Log.e("onSuccess: ",downloadUrl.toString() );
-
                                         naamm = naam.getText().toString();
                                         livee = livesIn.getText().toString();
                                         agee = age.getText().toString();
@@ -121,7 +143,6 @@ public class AddPerson extends AppCompatActivity {
                                                 Toast.makeText(AddPerson.this, naamm+" added to personnel contacts", Toast.LENGTH_SHORT).show();
                                                 onBackPressed();
                                                 ss.dismiss();
-
                                             }
                                         });
                                     }
@@ -134,7 +155,6 @@ public class AddPerson extends AppCompatActivity {
                                 // Handle unsuccessful uploads
                                 // ...
                                 ss.dismiss();
-
                             }
                         });
 
