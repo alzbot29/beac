@@ -35,7 +35,7 @@ public class Profile extends AppCompatActivity {
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                list.clear();
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                     String key=childDataSnapshot.getKey();
                     People people=childDataSnapshot.getValue(People.class);
@@ -45,7 +45,8 @@ public class Profile extends AppCompatActivity {
                 }
                 recyclerView=findViewById(R.id.recyclerView2);
                 Log.e("onDataChange: ", String
-                        .valueOf(list.size()));
+                        .valueOf(list.get(0).getDownloadUrl()));
+
                 peopleAdapter=new PeopleAdapter(list);
                 recyclerView.setAdapter(peopleAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(Profile.this));

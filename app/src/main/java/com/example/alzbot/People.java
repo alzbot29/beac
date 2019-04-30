@@ -1,9 +1,24 @@
 package com.example.alzbot;
 
 public class People {
-    String naamm,livee,agee,placee,timee,relationn,notess;
+    String naamm;
+    String livee;
+    String agee;
+    String placee;
+    String timee;
+    String relationn;
+    String notess;
+    String downloadUrl;
 
-    public People(String naamm, String livee, String agee, String placee, String timee, String relationn, String notess) {
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
+    public People(String naamm, String livee, String agee, String placee, String timee, String relationn, String notess, String downloadUrl) {
         this.naamm = naamm;
         this.livee = livee;
         this.agee = agee;
@@ -11,6 +26,7 @@ public class People {
         this.timee = timee;
         this.relationn = relationn;
         this.notess = notess;
+        this.downloadUrl = downloadUrl;
     }
 
     public String getNaamm() {
@@ -77,7 +93,9 @@ public class People {
                 "agee : "+agee+"\n"+
                 "placee : "+placee+"\n"+
                 "timee : "+timee+"\n"+
-                "relationn : "+relationn);
+                "relationn : "+relationn+"\n"+
+                "notess : "+notess+"\n"+
+                "downloadUrl : "+downloadUrl);
     }
 
     public People() {

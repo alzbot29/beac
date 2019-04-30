@@ -51,7 +51,12 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
 
             makeRequest();
         }
-
+        findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AssistantActivity.this,HomeActivity.class));
+            }
+        });
 
         final AIConfiguration config = new AIConfiguration("acbe80cae84249caa2b796604b6a44ed",
                 AIConfiguration.SupportedLanguages.English,
@@ -98,7 +103,10 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
 
         Log.d(TAG, "onResult: this is the result returned from dialogflow" + result.toString());
         Result result1 = result.getResult();
+        Log.d(TAG, "onResult: this is the result returned from dialogflow" + result1.getFulfillment().getSpeech());
+
         assistance_question_text.setText(result1.getResolvedQuery());
+        assistance_answer_text.setText(result1.getFulfillment().getSpeech());
         if(result1.getFulfillment().getSpeech().contains("njkdfsgl"))
         {
             FirebaseDatabase database=FirebaseDatabase.getInstance();

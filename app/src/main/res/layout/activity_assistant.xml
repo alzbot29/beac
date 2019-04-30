@@ -75,10 +75,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaa_bold"
-            android:text="You are Rahul Pandey, you live in India, you are an Alzheimer Patient that is you forget things more frequently. But that is not a matter of concern, I am here to help you refresh your memory. Ask me anything."
+            android:text="You are Vinod, you live in India, you are an Alzheimer Patient that is you forget things more frequently. But that is not a matter of concern, I am here to help you refresh your memory. Ask me anything."
             android:textAlignment="center"
             android:textSize="22sp"
             android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:text="Home" />
 
 
     </LinearLayout>
