@@ -76,6 +76,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
         {
             Dialog dialog=new Dialog(view.getContext());
             dialog.setContentView(R.layout.item_detail_person);
+
             TextView name1,rel1,address1,age1,notes1,livesin1;
             ImageView imageView;
             imageView=dialog.findViewById(R.id.imageView);
@@ -85,6 +86,8 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
             age1=dialog.findViewById(R.id.age);
             notes1=dialog.findViewById(R.id.notes);
             livesin1=dialog.findViewById(R.id.livesin);
+
+
             name1.setText(people.getNaamm());
             rel1.setText(people.getRelationn());
             address1.setText(people.getPlacee());
@@ -96,6 +99,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
             } catch (Exception e) {
             }
             dialog.show();
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
         }
 

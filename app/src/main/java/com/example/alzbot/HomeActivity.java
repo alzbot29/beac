@@ -34,8 +34,6 @@ import java.util.HashMap;
 public class HomeActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 0;
-    private static final int CAMERA_REQUEST1 = 1;
-    private static final int CAMERA_REQUEST2 = 2;
 
     private static final String TAG = "HomeActivity";
     private Button capture,peopleIKnow;
@@ -54,18 +52,6 @@ public class HomeActivity extends AppCompatActivity {
 
          database =FirebaseDatabase.getInstance();
          databaseReference=database.getReference();
-         userPhoto=databaseReference.child("userPhoto");
-        userPhoto.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         FloatingActionButton assist = (FloatingActionButton)findViewById(R.id.assistant);
 
@@ -83,7 +69,6 @@ public class HomeActivity extends AppCompatActivity {
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 Intent intent = new Intent(HomeActivity.this,Profile.class);
                 startActivity(intent);
             }

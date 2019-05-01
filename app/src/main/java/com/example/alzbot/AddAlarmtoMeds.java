@@ -84,10 +84,8 @@ public class AddAlarmtoMeds extends AppCompatActivity {
 
                     alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
 
-
                 }
                 medicinesRef.setValue(asd);
-                AlzManager.initializeInstance(v.getContext());
             }
         });
     }

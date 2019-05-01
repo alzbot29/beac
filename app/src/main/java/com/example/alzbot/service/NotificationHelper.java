@@ -76,8 +76,8 @@ public class NotificationHelper {
         //scales well when device time settings/locale is changed
         //We're setting alarm to fire notification after 15 minutes, and every 15 minutes there on
         alarmManagerElapsed.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntentElapsed);
+                SystemClock.elapsedRealtime() + (3*60*1000),
+                3*60*1000, alarmIntentElapsed);
     }
 
     public static void cancelAlarmRTC() {

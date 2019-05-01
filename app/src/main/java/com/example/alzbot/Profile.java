@@ -37,15 +37,10 @@ public class Profile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    String key=childDataSnapshot.getKey();
                     People people=childDataSnapshot.getValue(People.class);
                     list.add(people);
-                    Log.v("key",key); //displays the key for the node
-
                 }
                 recyclerView=findViewById(R.id.recyclerView2);
-                Log.e("onDataChange: ", String
-                        .valueOf(list.get(0).getDownloadUrl()));
 
                 peopleAdapter=new PeopleAdapter(list);
                 recyclerView.setAdapter(peopleAdapter);

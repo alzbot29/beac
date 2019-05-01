@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -117,7 +118,8 @@ public class AddPerson extends AppCompatActivity {
                 ss.setTitle("Uploading..");
                 ss.setCancelable(false);
                 ss.show();
-                riversRef.putFile(Uri.fromFile(f))
+                Uri apkURI = Uri.fromFile(f);
+                riversRef.putFile(apkURI)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -166,9 +168,12 @@ public class AddPerson extends AppCompatActivity {
     public void takePhoto(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photo = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
+        imageUri = FileProvider.getUriForFile(
+                getBaseContext(),
+                getApplicationContext()
+                        .getPackageName() + ".provider", photo);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(photo));
-        imageUri = Uri.fromFile(photo);
+                imageUri);
         startActivityForResult(intent, TAKE_PICTURE);
     }
     Bitmap bitmap;

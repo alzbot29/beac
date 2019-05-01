@@ -71,9 +71,9 @@ public class AssistantActivity extends AppCompatActivity implements AIListener{
         NotificationHelper.enableBootReceiver(this);
         NotificationHelper.scheduleRepeatingRTCNotification(this, "12","40");
         NotificationHelper.enableBootReceiver(this);
-        NotificationHelper.scheduleRepeatingRTCNotification(this, "12","45");
+        NotificationHelper.scheduleRepeatingRTCNotification(this, "12","50");
         NotificationHelper.enableBootReceiver(this);
-        NotificationHelper.scheduleRepeatingRTCNotification(this, "14","00");
+        NotificationHelper.scheduleRepeatingRTCNotification(this, "13","00");
         NotificationHelper.enableBootReceiver(this);
         NotificationHelper.scheduleRepeatingRTCNotification(this, "17","00");
         NotificationHelper.enableBootReceiver(this);
