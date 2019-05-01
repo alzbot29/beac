@@ -46,9 +46,6 @@ public class DashboardActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     private boolean mAlreadyStartedService = false;
-    FirebaseDatabase database;
-    DatabaseReference locationReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,29 +76,6 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this,AddAlarmtoMeds.class));
             }
         });
-        database=FirebaseDatabase.getInstance();
-        locationReference=database.getReference("location");
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
-                        String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
-
-//                        if (latitude != null && longitude != null) {
-                            Log.d(getString(R.string.msg_location_service_started) , "\n Latitude : " + latitude + "\n Longitude: " + longitude);
-                            HashMap<String,String> key=new HashMap<>();
-                            key.put("latitude",latitude);
-                            key.put("longitude",longitude);
-                        Date currentTime = Calendar.getInstance().getTime();
-                        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-                        key.put("time",dateFormat.format(currentTime));
-                        locationReference.push().setValue(key);
-//                        }
-                    }
-                }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
-        );
     }
 
 

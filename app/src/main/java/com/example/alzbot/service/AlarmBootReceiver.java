@@ -1,12 +1,10 @@
 package com.example.alzbot.service;
 
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Created by ptyagi on 4/18/17.
- */
 
 public class AlarmBootReceiver extends BroadcastReceiver {
     @Override

@@ -41,7 +41,7 @@ public class NotificationHelper {
                 Integer.getInteger(min, 0));
 
         //Setting intent to class where Alarm broadcast message will be handled
-        Intent intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, AlarmReceiver2.class);
         //Setting alarm pending intent
         alarmIntentRTC = PendingIntent.getBroadcast(context, ALARM_TYPE_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -64,7 +64,7 @@ public class NotificationHelper {
      */
     public static void scheduleRepeatingElapsedNotification(Context context) {
         //Setting intent to class where notification will be handled
-        Intent intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, AlarmReceiver2.class);
 
         //Setting pending intent to respond to broadcast sent by AlarmManager everyday at 8am
         alarmIntentElapsed = PendingIntent.getBroadcast(context, ALARM_TYPE_ELAPSED, intent, PendingIntent.FLAG_UPDATE_CURRENT);
